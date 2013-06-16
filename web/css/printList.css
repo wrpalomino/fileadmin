@@ -1,0 +1,35 @@
+/* created by William, 02/03/2013: to set the list styles to print */
+
+/*Reset Style*/
+body {margin:0; padding:0; line-height: 1.4em; word-spacing:1px; letter-spacing:0.2px; font: 11px Arial, Helvetica,"Lucida Grande", serif; color: #000;}
+
+/*Remove Element*/
+
+
+.sf_admin_list table th {
+  padding: 2px;
+  border: 1px solid;
+  background-color: #ccffff !important;
+}
+
+.sf_admin_list table td {
+  padding: 2px;
+  border-bottom: 1px solid;
+}
+
+#sf_admin_container h1,
+ul.sf_admin_actions, #sb-loading,
+.sf_admin_td_actions, #sf_admin_list_th_actions,
+.sf_admin_list_td_updated_at, .sf_admin_list_th_updated_at,
+#sideBar, #clientFilter, #menu8, #section_links {
+  display:none;
+}
+#logo, #catnavi, .topnavi, .more-link, .navigation, #sidebartop, #related, #social, #sponsors, .tabs, #allpost, .toolbar, .splitbox, #commentform, #commentabs .idTabs, .postmeta-content .comments, #respond h3, .tag, .footerlinks {display:none;}
+
+/* Show URL */
+a:link, a:visited {background: transparent; color:#333; text-decoration:none;}
+a:link[href^="http://"]:after, a[href^="http://"]:visited:after {content: " (" attr(href) ") "; font-size: 11px;}
+a[href^="http://"] {color:#000;} 
+
+/*Break Page*/
+#comments {page-break-before: always;}

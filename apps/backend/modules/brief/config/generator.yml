@@ -1,0 +1,43 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Brief
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          brief
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        fields:
+          roi_tape_received: { label: ROI }
+        display: [request1, request2,	request3,	request4, status, scanned, roi_tape_received, user_file, updated_at]
+        max_per_page: 1
+        batch_actions: {}
+        actions: {}
+        object_actions: {}
+      filter:  
+        display: [scanned, roi_tape_received, priors_received, statements_received, charges_received, summary_received, interview_recording, photographs_added,	user_file_id, status_id]
+      form:
+        display: [request1, request2,	request3,	request4, status_id, scanned, roi_tape_received, priors_received, statements_received, charges_received, summary_received, interview_recording, photographs_added, user_file_id]
+      edit:    
+        actions: 
+          _save:
+          reset:
+          search_mode:
+        #return_to: edit
+      ajaxedit: ~
+      new:     
+        actions: 
+          _save:
+          reset:
+          search_mode:
+        #return_to: edit
+      show:    ~
+      

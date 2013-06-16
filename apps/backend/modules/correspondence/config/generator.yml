@@ -1,0 +1,34 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Correspondence
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          correspondence
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        display: [subject, receiver_address, sender, user_file, notes, sent_byx, updated_at]
+        max_per_page: 20
+        batch_actions: {}
+        actions: {}
+        object_actions:
+          _edit:
+          _delete:
+      filter:  
+        display: [subject, receiver_address, sender_id, user_file_id, updated_at]
+      form:    ~
+      edit:    
+        return_to: edit
+      ajaxedit: ~
+      new:     
+        return_to: edit
+      show:    ~
+      

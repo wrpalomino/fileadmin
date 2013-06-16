@@ -1,0 +1,31 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Agency
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          agency_institution
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        display: [name, group_name, subgroup_name, status_id, updated_at]
+        max_per_page: 20
+        batch_actions: {}
+      filter:  
+        class: InstitutionFormFilter
+      form: 
+        class: InstitutionForm
+      edit:    
+        return_to: edit
+      ajaxedit: ~
+      new:     
+        return_to: edit
+      show:    ~
+      

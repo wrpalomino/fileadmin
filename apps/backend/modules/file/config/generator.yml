@@ -1,0 +1,58 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           UserFile
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          user_file
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:   
+        display: [number, first_name, last_name, solicitor, status, updated_at]
+        max_per_page: 1
+        batch_actions: 
+          closefiles:
+            label: "Close Files"
+          reopenfiles:
+            label: "Re-open Files"
+        object_actions: 
+          _show:     ~
+          _delete:  ~
+      filter: 
+        display: [number, charge_first_name, charge_last_name, first_name, last_name, preferred_contact_id, correspondence_sent_option, street, suburb, postcode, city, state, street2, suburb2, postcode2, city2, state2, home_phone, work_phone, mobile, other_phone, fax, email, case_number, instruction_on_file, in_custody, bail_on_this, client_id, solicitor_id, informant_id, prosecutor_id, barrister_id, prosecution_id, prison_id, status_id]
+          #[honorific_id, correspondence_title, correspondence_real_name, first_instructions_date, instruction, barrister_backsheet_options, barrister_fee]
+      form:    
+      edit:
+        display:
+          Client Info: [client_id, _load_client, charge_first_name, charge_last_name, first_name, last_name, honorific_id, preferred_contact_id, correspondence_title, correspondence_real_name, correspondence_sent_option, street, suburb, postcode, city, state, street2, suburb2, postcode2, city2, state2, home_phone, work_phone, mobile, other_phone, fax, email]
+          File Info:   [number, case_number, first_instructions_date, instruction_on_file, instruction, barrister_backsheet_options, barrister_fee, in_custody, bail_on_this, solicitor_id, informant_id, prosecution_id, prosecutor_id, prison_id, barrister_id, status_id]
+          #Instructions: [instruction]
+          Court Dates: [new_FileCourtDates]
+          Charges:     [new_FileCharges]
+        actions: 
+          _save:
+          search_mode:
+          clone_file:
+        #return_to: edit
+      ajaxedit: ~
+      new:  
+        display:
+          Client Info: [client_id, _load_client, charge_first_name, charge_last_name, first_name, last_name, honorific_id, preferred_contact_id, correspondence_title, correspondence_real_name, correspondence_sent_option, street, suburb, postcode, city, state, street2, suburb2, postcode2, city2, state2, home_phone, work_phone, mobile, other_phone, fax, email]
+          File Info:   [number, case_number, first_instructions_date, instruction_on_file, instruction, barrister_backsheet_options, barrister_fee, in_custody, bail_on_this, solicitor_id, informant_id, prosecution_id, prosecutor_id, prison_id, barrister_id, status_id]
+          #Instructions: [instruction]
+          Court Dates: [new_FileCourtDates]
+          Charges:     [new_FileCharges]
+        actions: 
+          _save:
+          clear:
+          search_mode:
+        #return_to: edit
+      show:    ~
+      

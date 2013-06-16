@@ -1,0 +1,2 @@
+<?php $helper->pre_text = '<p class="subtitle">Request for certified extract</p>'; ?>
+<?php echo $helper->get_partial_subfolder('adlefm', 'client', array('document' => $document, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>

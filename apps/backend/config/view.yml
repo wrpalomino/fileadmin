@@ -1,0 +1,45 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  
+  components:
+    #added by William, 25/01/2012: to add the navigation left menu
+    sidebar:      [sidebar, default]
+    clientFilter: [clientFilter, default]
+    
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  #stylesheets:    [main.css]
+  stylesheets:    
+    - /sfDoctrinePlugin/css/default.css
+    - /sfDoctrinePlugin/css/global.css
+    - main.css
+    - shadowbox.css
+    - /sfFormExtraPlugin/css/jquery.autocompleter.css
+    - /js/datepickerui/css/ui-lightness/jquery-ui-1.8.16.custom.css
+    - jquery.confirm.css
+
+  javascripts:    
+    - jquery-1.5.1.min.js
+    - jquery.confirm.js
+    - appowner.js
+    - shadowbox.js
+    - jquery.maskedinput-1.2.2.js
+    - datepickerui/datepicker.js
+    - jquery-ui-1.8.16.custom.min.js
+    #- jquery-ui-i18n-it.js //not necessary, this is for the italian language support (datepicker.js) 
+    - jquery.json-2.3.js
+    # keep this at the end, it has problems with other libraries such as datepicker.js & jquery-ui-1.8.16.custom.min.js
+    - /sfFormExtraPlugin/js/jquery.autocompleter.js
+
+  has_layout:     true
+  layout:         layout

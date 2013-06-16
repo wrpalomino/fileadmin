@@ -1,0 +1,18 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+##CONFIG##
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:    ~
+      edit:    
+        return_to: edit
+      ajaxedit: ~
+      new:     
+        return_to: edit
+      show:    ~
+      

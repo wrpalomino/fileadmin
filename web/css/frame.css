@@ -1,0 +1,10 @@
+/* created by William, 17/02/2013: to chnge some iframe styles */
+
+/* admin generator styles */
+#sf_admin_container #sf_admin_content .sf_admin_list table { 
+  table-layout: fixed;
+  width: 100% !important;
+}
+#sf_admin_container #sf_admin_content .sf_admin_list table td { 
+  overflow: hidden;
+}

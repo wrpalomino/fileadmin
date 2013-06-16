@@ -1,0 +1,56 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CourtDate
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          court_date
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        fields:
+          time: { label: Date & Time, date_format: 'EEE, dd MMM yyyy h:mm a' }
+          appearing: { label: Solicitor }
+          judge: { label: Before }
+        display: [time, court_name, listing, client_name, appearing, appearing_type, updated_at]
+        sort: [time, desc]
+        max_per_page: 1
+        batch_actions: {}
+        object_actions:
+          _edit:
+          _delete:
+      filter:  ~
+      form:    ~
+      edit:
+        display:
+          Court Date Info: [court_id, date, listing_id, time, appearing_id, barrister_id, court_note_id, user_file_id]
+          Result:          [judge_id, result, instruction]
+          Fees:            [appearing_type_id, Fee]
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      ajaxedit: ~
+      new:  
+        display:
+          Court Date Info: [court_id, date, listing_id, time, appearing_id, barrister_id, court_note_id, user_file_id]
+          Result:          [judge_id, result, instruction]
+          Fees:            [appearing_type_id, Fee]
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      form2:
+        title: Edit Court Date Fee
+        display: [listing_id, appearing_id, barrister_id, appearing_type_id, Fee]
+        actions: 
+          _save:
+      show:    ~
+      

@@ -1,0 +1,36 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           sfGuardUser
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sf_guard_user_barrister
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        max_per_page: 1
+        table_method: getBarristers
+      filter:  
+        class: BarristerFormFilter
+      form:    
+        class: BarristerForm
+        #actions: {}
+      edit:    
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      ajaxedit: ~
+      new:     
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      show:    ~

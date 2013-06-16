@@ -1,0 +1,36 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Receipt
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          receipt
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        display: [number, amount_paid, full_part, _details, _documents]
+        max_per_page: 20
+        batch_actions: {}
+      filter:  ~
+      form:    ~
+      edit:    
+        title: Edit Receipt Number %%number%%
+        actions: 
+          _save:
+          _list:
+          #return_to: edit
+      ajaxedit: ~
+      new:     
+        actions: 
+          _save:
+          _list:
+          #return_to: edit
+      show:    ~
+      

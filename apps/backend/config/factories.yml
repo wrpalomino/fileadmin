@@ -1,0 +1,89 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/05-Factories
+
+prod:
+  logger:
+    class:   sfNoLogger
+    param:
+      level:   err
+      loggers: ~
+  mailer:
+    class: sfMailer
+    param:
+      logging:           %SF_LOGGING_ENABLED%
+      charset:           %SF_CHARSET%
+      delivery_strategy: realtime
+      transport:
+        class: Swift_MailTransport
+#        class: Swift_SmtpTransport
+        param:
+          host:       localhost
+          port:       25
+#          host:       203.63.31.171
+#          port:       25
+
+test:
+  storage:
+    class: sfSessionTestStorage
+    param:
+      session_path: %SF_TEST_CACHE_DIR%/sessions
+
+  response:
+    class: sfWebResponse
+    param:
+      send_http_headers: false
+
+  mailer:
+    param:
+      delivery_strategy: none
+
+dev:
+  # localhost mail settings 
+  mailer:
+    class: sfMailer
+    param:
+      logging:           %SF_LOGGING_ENABLED%
+      charset:           %SF_CHARSET%
+      delivery_strategy: realtime
+      #delivery_strategy: none
+      
+      #sending email from a different server, get your own email account and email server params to run this
+      transport:
+        class: Swift_SmtpTransport
+        param:
+          host:       smtp.gmail.com
+          port:       465
+          encryption: ssl
+          username:   faxdbcrimlaw@gmail.com
+          password:   snookums01
+          #username:   wr.palomino@gmail.com
+          #password:   
+      
+      #transport:
+       # class: Swift_SmtpTransport
+        #param:
+          #host:       mail.internode.on.net
+         # host:       localhost
+          #port:       25
+          #username:
+          #password:
+
+all:
+  routing:
+    class: sfPatternRouting
+    param:
+      generate_shortest_url:            true
+      extra_parameters_as_query_string: true
+
+  view_cache_manager:
+    class: sfViewCacheManager
+    param:
+      cache_key_use_vary_headers: true
+      cache_key_use_host_name:    true
+  
+  # added by William, to extend session time from default 30 minutes (1800, 30*60) to 120 minutes (7200, 120*60)
+  # for more user configuartions, check: lib/vendor/symfony/lib/config/config/factories.yml
+  user:
+    class: myUser
+    param:
+      timeout: 7200

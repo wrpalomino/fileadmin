@@ -1,0 +1,43 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CourtNote
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          court_note
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      config:
+      actions: ~
+      fields:  ~
+      list:
+        fields:
+          #is_active: { label: Active }
+          #updated_at: { label: Updated }
+        display: [value]
+        sort: [value, asc]
+        max_per_page: 40
+        object_actions:
+          _edit:    ~
+          #_delete:  ~
+        batch_actions: {}
+      filter:  ~
+      form:    ~
+      edit:
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      ajaxedit: ~
+      new:  
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      show:    ~
+      

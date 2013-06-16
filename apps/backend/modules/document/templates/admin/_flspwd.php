@@ -1,0 +1,2 @@
+<?php $helper->barrister_text = ""; ?>
+<?php echo $helper->get_partial_subfolder('pspnwf', 'barrister', array('document' => $document, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>

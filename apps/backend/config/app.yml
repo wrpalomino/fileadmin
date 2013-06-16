@@ -1,0 +1,257 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  admin:
+    default_edit_pager: 1
+    partial_links: true
+
+  agency:
+    default_edit_pager: 1
+    partial_links: true
+    
+  client:
+    default_edit_pager: 1
+    partial_links: true
+
+  barrister:
+    default_edit_pager: 1
+    partial_links: true
+
+  brief:
+    default_edit_pager: x
+    partial_links: true
+
+  charge:
+    default_edit_pager: 0
+    partial_links: true
+
+  client:
+    default_edit_pager: 1
+    partial_links: true
+    
+  clerk:
+    default_edit_pager: 1
+    partial_links: false
+
+  committalStream:
+    default_edit_pager: 1
+    partial_links: true
+
+  compliance:
+    default_edit_pager: 1
+    partial_links: true
+    
+  correspondence:
+    default_edit_pager: 0
+    partial_links: true
+    
+  court:
+    default_edit_pager: x
+    partial_links: true
+    
+  courtNote:
+    default_edit_pager: 0
+    partial_links: false
+
+  document:
+    default_edit_pager: 0
+    partial_links: true
+
+  fee:
+    default_edit_pager: 0
+    partial_links: true
+    
+  fileFee:
+    default_edit_pager: 1
+    partial_links: true
+    
+  invoice:
+    default_edit_pager: 0
+    partial_links: true
+    
+  receipt:
+    default_edit_pager: 0
+    partial_links: true
+
+  file:
+    default_edit_pager: x
+    partial_links: true
+   
+  fileNote:
+    default_edit_pager: 0
+    partial_links: true
+
+  grant:
+    default_edit_pager: 0
+    partial_links: true
+
+  help:
+    default_edit_pager: 0
+    partial_links: false
+
+  informant:
+    default_edit_pager: 1
+    partial_links: true
+
+  institution:
+    default_edit_pager: 0
+    partial_links: true
+
+  judge:
+    default_edit_pager: 1
+    partial_links: true
+
+  legal:
+    default_edit_pager: 1
+    partial_links: true
+    
+  listing:
+    default_edit_pager: 0
+    partial_links: false
+
+  prosecution:
+    default_edit_pager: 1
+    partial_links: true
+    
+  prosecutor:
+    default_edit_pager: 1
+    partial_links: true
+
+  todo:
+    default_edit_pager: 0
+    partial_links: true
+
+  user:
+    default_edit_pager: 0
+    partial_links: true
+    
+  sms:
+    default_edit_pager: 0
+    partial_links: false
+  
+  smsTemplate:
+    default_edit_pager: 0
+    partial_links: true
+    
+  gst: 10
+  precision: 2
+  rate_per_hour: 330
+  
+  server:
+    emailfrom:       faxdbcrimlaw@gmail.com
+    emailfromtitle:  Martinez & Morgan Lawyers
+    emailto:         faxdbcrimlaw@gmail.com
+    emailpassword:   snookums01
+    # ip of the production site
+    proip:           111.223.227.66
+    baseurl:         111.223.227.66
+    owneremail:      wr.palomino@gmail.com
+    notifyfaxpages:  3
+    
+    loginpage:       https://secondary.geo-ha.micron21.com:10000
+    username:        root
+    password:        Q8J2c172Sj3x
+  
+  # html to pdf convertion service (.setting is added to allow get pdfservice data set as arr)
+  .settings:
+    pdfservice:
+      active:         0
+      provider:       PDFCrowd
+      loginpage:      https://pdfcrowd.com/user/sign_in
+      password:       williampalomino
+      user:           williampalomino
+      apikey:         031d623eba66686a45a50852ad4e3d84
+  
+  # fax to email service
+  .settings1:
+    faxservice:
+      active:         0
+      provider:       Micron21 eFax
+      loginpage:      https://voice.url.net.au/user
+      username:       mike@dbcrimlaw.com.au
+      password:       BNd!VGKl4%uh
+      customerid:     1987
+      PIN:            4763
+      domain:         fax.url.net.au
+      serviceid:      2866
+      faxnumber:      0391115645
+      faxfromemail:   faxdbcrimlaw@gmail.com
+      faxtoemail:     faxdbcrimlaw@gmail.com
+      # for testing only, expired (10/01/2013)
+      #serviceid:      2663
+      #faxnumber:      0391115627
+      #faxfromemail:   wr.palomino@gmail.com
+      #faxtoemail:     wr.palomino@gmail.com
+  
+  .settings2:
+    smsservice:
+      active:         0
+      #provider:       SMSFUN
+      #url:            https://www.smsfun.com.au/api/login.php
+      #type:           curl
+      #params:
+        #mobile:       0423595306
+        #password:     virgoSMSFUN11
+        #send_to:      .
+        #message:      .
+        #send:         .
+      provider:       SMSBROADCAST
+      loginpage:      https://www.smsbroadcast.com.au/
+      url:            http://www.smsbroadcast.com.au/api.php
+      type:           url
+      params:
+        #username:     williampalomino
+        #password:     williampalomino
+        username:     mikeb33
+        password:     generic01
+        # fields must have at least one character; otherwise, they are disregarded by isset()
+        from:         .
+        to:           .
+        message:      .
+  
+  .settings3:
+    icloudservice:
+      active:         0
+      provider:       APPLEICLOUD
+      loginpage:      https://www.icloud.com/
+      url:            .
+      type:           curl
+      params:
+        username:     Michael.brown3@me.com
+        password:     snookums99
+        icloudid:     1060368088
+        appleid:      michael.brown3
+        server:       p01
+        description:  .
+        summary:      .
+        eid:          .
+        tstart:       .
+        tend:         .
+  
+  appowner:
+    address1: "Martinez & Morgan\n213 Little street\nReservoir\nVIC 3833"
+    address2: "Martinez & Morgan\n123 Little street\nReservoir\nVIC 3833"
+    address3: "Martinez & Morgan\n293 Little street\nReservoir\nVIC 3833"
+    phone: 4567 2222
+    fax: 3456 1234
+    solicitorcode: 234 412
+    bankaccountname: Martinez & Morgan
+    firmname: Martinez & Morgan
+    abn: 14 234 567 123
+    bankbsbbranch: 123-567
+    bankaccounts:
+      trust: (TRUST) St George, BSB 234-678  ACC 423 345 123
+      #trust: (TRUST) St George, BSB 113-879  ACC 410 762 278
+      business: (BUSINESS) St George, BSB 234-678  ACC 421 345 123
+    trustaccount:
+      Bank: St George
+      Account Name: Martinez & Morgan Trust
+      BSB number: 234-567
+      ACC number: 234 456 789
+    businessaccount:
+      Bank: St George
+      Account Name: Martinez & Morgan Business
+      BSB number: 234-567
+      ACC number: 345 123 878

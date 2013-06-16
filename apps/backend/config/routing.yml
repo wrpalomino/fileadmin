@@ -1,0 +1,473 @@
+court_note:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CourtNote
+    module:               courtNote
+    prefix_path:          /courtNote
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_clerk:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               clerk
+    prefix_path:          /clerk
+    column:               id
+    with_wildcard_routes: true
+
+user_file_userFile:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                UserFile
+    module:               userFile
+    prefix_path:          /userFile
+    column:               id
+    with_wildcard_routes: true
+
+short_message_template:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ShortMessageTemplate
+    module:               smsTemplate
+    prefix_path:          /smsTemplate
+    column:               id
+    with_wildcard_routes: true
+
+correspondence:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Correspondence
+    module:               correspondence
+    prefix_path:          /correspondence
+    column:               id
+    with_wildcard_routes: true
+
+short_message:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ShortMessage
+    module:               sms
+    prefix_path:          /sms
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_judge:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               judge
+    prefix_path:          /judge
+    column:               id
+    with_wildcard_routes: true
+
+committal_stream:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CommittalStream
+    module:               committalStream
+    prefix_path:          /committalStream
+    column:               id
+    with_wildcard_routes: true
+
+listing:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Listing
+    module:               listing
+    prefix_path:          /listing
+    column:               id
+    with_wildcard_routes: true
+
+receipt:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Receipt
+    module:               receipt
+    prefix_path:          /receipt
+    column:               id
+    with_wildcard_routes: true
+
+invoice:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Invoice
+    module:               invoice
+    prefix_path:          /invoice
+    column:               id
+    with_wildcard_routes: true
+
+user_file_fileFee:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                UserFile
+    module:               fileFee
+    prefix_path:          /fileFee
+    column:               id
+    with_wildcard_routes: true
+
+file_note:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                FileNote
+    module:               fileNote
+    prefix_path:          /fileNote
+    column:               id
+    with_wildcard_routes: true
+
+file_attachement:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                FileAttachement
+    module:               uploadedFile
+    prefix_path:          /uploadedFile
+    column:               id
+    with_wildcard_routes: true
+
+document_document:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Document
+    module:               document
+    prefix_path:          /document
+    column:               id
+    with_wildcard_routes: true
+
+agency_institution:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Agency
+    module:               institution
+    prefix_path:          /institution
+    column:               id
+    with_wildcard_routes: true
+
+user_file:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                UserFile
+    module:               file
+    prefix_path:          /file
+    column:               id
+    with_wildcard_routes: true
+
+compliance:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Compliance
+    module:               compliance
+    prefix_path:          /compliance
+    column:               id
+    with_wildcard_routes: true
+
+aid_grant:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                AidGrant
+    module:               grant
+    prefix_path:          /grant
+    column:               id
+    with_wildcard_routes: true
+
+agency_prosecution:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Agency
+    module:               prosecution
+    prefix_path:          /prosecution
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_prosecutor:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               prosecutor
+    prefix_path:          /prosecutor
+    column:               id
+    with_wildcard_routes: true
+
+brief:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Brief
+    module:               brief
+    prefix_path:          /brief
+    column:               id
+    with_wildcard_routes: true
+
+charge:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Charge
+    module:               charge
+    prefix_path:          /charge
+    column:               id
+    with_wildcard_routes: true
+
+document_help:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Document
+    module:               help
+    prefix_path:          /help
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_admin:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               admin
+    prefix_path:          /admin
+    column:               id
+    with_wildcard_routes: true
+
+document:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Document
+    module:               fee
+    prefix_path:          /fee
+    column:               id
+    with_wildcard_routes: true
+
+task:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Task
+    module:               todo
+    prefix_path:          /todo
+    column:               id
+    with_wildcard_routes: true
+
+agency:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Agency
+    module:               agency
+    prefix_path:          /agency
+    column:               id
+    with_wildcard_routes: true
+
+legal_aid:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                LegalAid
+    module:               legal
+    prefix_path:          /legal
+    column:               id
+    with_wildcard_routes: true
+
+court_date:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CourtDate
+    module:               court
+    prefix_path:          /court
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_informant:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               informant
+    prefix_path:          /informant
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_barrister:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               barrister
+    prefix_path:          /barrister
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user_client:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               client
+    prefix_path:          /client
+    column:               id
+    with_wildcard_routes: true
+
+sf_guard_user:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sfGuardUser
+    module:               user
+    prefix_path:          /user
+    column:               id
+    with_wildcard_routes: true
+
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: client, action: index, edit_pager: 1 }
+  
+# added by William, 21/04/2012: for security
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+  
+sf_guard_forgot_password:
+  url:   /forgot_password
+  param: { module: sfGuardForgotPassword, action: index }
+  
+# routes for main filter
+mf_client:
+  url:   /:module/:action/*
+  param: { module: client }
+  
+mf_court:
+  url:   /:module/:action/*
+  param: { module: court }
+  
+mf_informant:
+  url:   /:module/:action/*
+  param: { module: informant }
+  
+mf_charge:
+  url:   /:module/:action/*
+  param: { module: charge }
+  
+mf_brief:
+  url:   /:module/:action/*
+  param: { module: brief }
+  
+mf_prosecution:
+  url:   /:module/:action/*
+  param: { module: prosecution }
+  
+mf_barrister:
+  url:   /:module/:action/*
+  param: { module: barrister }
+  
+mf_fee:
+  url:   /:module/:action/*
+  param: { module: fee }
+  
+mf_legal: 
+  url:   /:module/:action/*
+  param: { module: legal }
+  
+mf_grant: 
+  url:   /:module/:action/*
+  param: { module: grant }
+  
+mf_compliance: 
+  url:   /:module/:action/*
+  param: { module: compliance }
+  
+mf_agency:
+  url:   /:module/:action/*
+  param: { module: agency }
+  
+mf_todo:
+  url:   /:module/:action/*
+  param: { module: todo }
+  
+mf_admin:
+  url:   /:module/:action/*
+  param: { module: admin }
+
+mf_file:
+  url:   /:module/:action/*
+  param: { module: file }
+  
+mf_user:
+  url:   /:module/:action/*
+  param: { module: user }
+  
+mf_institution:
+  url:   /:module/:action/*
+  param: { module: institution }
+  
+mf_help:
+  url:   /:module/:action/*
+  param: { module: help }
+  
+mf_uploadedFile:
+  url:   /:module/:action/*
+  param: { module: uploadedFile }
+  
+mf_fileNote:
+  url:   /:module/:action/*
+  param: { module: fileNote }
+  
+mf_prosecutor:
+  url:   /:module/:action/*
+  param: { module: prosecutor }
+  
+mf_fileFee:
+  url:   /:module/:action/*
+  param: { module: fileFee }
+  
+mf_invoice:
+  url:   /:module/:action/*
+  param: { module: invoice }
+  
+mf_receipt:
+  url:   /:module/:action/*
+  param: { module: receipt }
+  
+mf_listing:
+  url:   /:module/:action/*
+  param: { module: listing }
+  
+mf_courtNote:
+  url:   /:module/:action/*
+  param: { module: courtNote }
+  
+mf_committalStream:
+  url:   /:module/:action/*
+  param: { module: committalStream }
+  
+mf_judge:
+  url:   /:module/:action/*
+  param: { module: judge }
+  
+mf_sms:
+  url:   /:module/:action/*
+  param: { module: sms }
+  
+mf_document:
+  url:   /:module/:action/*
+  param: { module: document }
+  
+mf_smsTemplate:
+  url:   /:module/:action/*
+  param: { module: smsTemplate }
+
+mf_correspondence:
+  url:   /:module/:action/*
+  param: { module: correspondence }
+  
+mf_clerk:
+  url:   /:module/:action/*
+  param: { module: clerk }
+  
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+  
+default:
+  url:   /:module/:action/*
+

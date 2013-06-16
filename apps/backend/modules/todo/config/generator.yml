@@ -1,0 +1,42 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Task
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          task
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Tasks List
+        fields:
+          task_for_id: { label: For }
+          task_by_id: { label: By }
+          updated_at: { date_format: dd-MM-yyyy }
+        display: [surname, file_number, task_for, task_by, due_date, done, updated_at]
+        batch_actions: {}
+      filter:  
+        display: [task_by_id, task_for_id, user_file_id, due_date, done]
+      form:    
+        actions: {}
+      edit:    
+        title: Edit Task in File %%file_number%%
+        actions: 
+          _save:
+          _list:
+        #return_to: edit
+      ajaxedit: ~
+      new:     
+        title: New Task
+        actions: 
+          _save:
+          _list:
+        #return_to: edit
+      show:    ~

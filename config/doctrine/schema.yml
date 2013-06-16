@@ -1,0 +1,834 @@
+# UNIQUE, PRIMARY & FOREIGN KEY are constraints, not indexes. Though most databases implement these 
+# constraints by using an index. (NO NEED to re-declare).
+# Indexes are usually more effective if there you have a high selectivity. This is the ratio of number of 
+# distinct values to the total number of rows.
+# Indexes (UNIQUE or not) fields can allow NULL values (MyISAM, InnoDB)
+
+# RESET AUTOINCREMENT: ALTER TABLE document_type AUTO_INCREMENT = 1
+
+################################# CREATE A FOREIGN KEY IN AN EXISTING TABLE ################################
+# 1ST: CREATE THE FIELD
+# ALTER TABLE short_message ADD user_file_id BIGINT AFTER user_id;
+# 2ND: MAKE IT AN INDEX
+# ALTER TABLE short_message ADD INDEX user_file_id_idx (user_file_id);
+# 3RD: LINK IT TO THE FOREIGN TABLE
+# ALTER TABLE short_message ADD CONSTRAINT short_message_user_file_id_user_file_id FOREIGN KEY (user_file_id) REFERENCES user_file(id) ON DELETE SET NULL;
+
+# ALTER TABLE document_type ADD admin_section_id BIGINT AFTER is_active;
+# ALTER TABLE document_type ADD INDEX admin_section_id_idx (admin_section_id);
+# ALTER TABLE document_type ADD CONSTRAINT document_type_admin_section_id_admin_section_id FOREIGN KEY (admin_section_id) REFERENCES admin_section(id) ON DELETE SET NULL;
+
+AccountType:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 } 
+
+AdminContent:
+  actAs: { Timestampable: ~ }
+  columns:
+    code: { type: string(120), notnull: true }
+    value: { type: string(10000) }
+    is_active: { type: boolean, default: 1 } 
+    type: { type: string(10), default 'FIXED' }
+    format_params: { type: string(60) }
+    document_type_id: { type: integer, notnull: false }
+    admin_section_id: { type: integer, notnull: false }
+  relations:
+    DocumentType: { onDelete: SET NULL, local: document_type_id, foreign: id }
+    AdminSection: { onDelete: SET NULL, local: admin_section_id, foreign: id }
+
+AdminSection:
+  actAs: { Timestampable: ~ }
+  columns:
+    code: { type: string(120), notnull: true }
+    name: { type: string(120) }
+    is_active: { type: boolean, default: 1 } 
+    parent_id: { type: integer, notnull: false }
+  relations:
+    ParentSection: { class: AdminSection, onDelete: SET NULL, local: parent_id, foreign: id }
+
+Agency:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    reference_number: { type: string(60) }
+    street: { type: string(120) }
+    suburb: { type: string(120) }
+    postcode: { type: string(120) }
+    city: { type: string(120) }
+    state: { type: string(120), default: 'VIC' }
+    phone: { type: string(120) }
+    general_phone: { type: string(120) }
+    fax: { type: string(120) }
+    general_fax: { type: string(120) }
+    email: { type: string(120) }
+    website: { type: string(120) }
+    logo_file: { type: string(120) }
+    sf_guard_group_id: { type: integer, notnull: false }
+    subgroup_id: { type: integer, notnull: false }
+    #officer_id: { type: integer, notnull: false }
+    status_id: { type: integer, notnull: false }
+  relations:
+    Group: { class: sfGuardGroup, onDelete: SET NULL, local: sf_guard_group_id, foreign: id }
+    Subgroup: { onDelete: SET NULL, local: subgroup_id, foreign: id }
+    #Officer: { class: sfGuardUser, onDelete: SET NULL, local: officer_id, foreign: id }
+    Status: { onDelete: SET NULL, local: status_id, foreign: id }
+    Users:
+      class: sfGuardUser
+      refClass: sfGuardUserAgency
+      local: agency_id
+      foreign: user_id
+      foreignAlias: Agencies
+  indexes:
+    name_idx: { fields: name }
+    
+sfGuardUserAgency:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  actAs: [Timestampable]
+  columns:
+    user_id:
+      type: integer
+      primary: true
+    agency_id:
+      type: integer
+      primary: true
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      onDelete: CASCADE
+    Agency:
+      class: Agency
+      local: agency_id
+      onDelete: CASCADE
+
+AidGrant:
+  actAs: { Timestampable: ~ }
+  columns:
+    aid_in_place: { type: string(120) }
+    fee_granted: { type: string(120) }
+    is_indictable: { type: boolean, default: false }
+    date: { type: date }
+    legal_aid_id: { type: integer, notnull: true }
+  relations:
+    LegalAid: { onDelete: CASCADE, local: legal_aid_id, foreign: id }
+    
+AppearingType:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    description: { type: string(255) }
+    is_active: { type: boolean, default: 1 }
+  indexes:
+    name_idx: { fields: name }
+
+Appeal:
+  actAs: { Timestampable: ~ }
+  columns:
+    date_convicted: { type: date }
+    date_of_sentence: { type: date }
+    counsel_appearing: { type: string(20) }
+    client_in_custody: { type: string(20) }
+    client_to_attend: { type: string(20) }
+    appear_by_telecourt: { type: string(20) }
+    court_convicted_id: { type: integer, notnull: false }
+    court_date_id: { type: integer, notnull: true }
+  relations:
+    CourtDate: { onDelete: CASCADE, local: court_date_id, foreign: id }
+    CourtConvicted: { class: Agency, onDelete: SET NULL, local: court_convicted_id, foreign: id }
+
+Brief:
+  actAs: { Timestampable: ~ }
+  columns:
+    request1: { type: date }
+    request2: { type: date }
+    request3: { type: date }
+    request4: { type: date }
+    interview_recording: { type: string(20) }
+    scanned: { type: string(20) }
+    hub_scanned: { type: string(20) }
+    depositions_added:    { type: string(20) }
+    roi_tape_received:    { type: string(20) }
+    photographs_added:    { type: string(20) }
+    priors_received:      { type: string(20) }
+    statements_received:  { type: string(20) }
+    charges_received:     { type: string(20) }
+    summary_received:     { type: string(20) }
+    user_file_id: { type: integer, notnull: true }
+    status_id: { type: integer, notnull: false }
+  relations:
+    UserFile: { onDelete: CASCADE, local: user_file_id, foreign: id }
+    Status: { onDelete: SET NULL, local: status_id, foreign: id }
+
+BriefAdditionalMaterial:
+  actAs: { Timestampable: ~ }
+  columns:
+    description: { type: string(255) }
+    date: { type: date }
+    brief_id: { type: integer, notnull: true }
+  relations:
+    Brief: { onDelete: CASCADE, local: brief_id, foreign: id }
+
+Charge:
+  actAs: { Timestampable: ~ }
+  columns:
+    item: { type: string(20), notnull: true }
+    section: { type: string(60) }
+    acts: { type: string(120) }
+    charge: { type: string(255), notnull: true }
+    comment: { type: string(255) }
+    date: { type: date }
+    user_file_id: { type: integer, notnull: true }
+    type_id: { type: integer, notnull: false }
+  relations:
+    UserFile: { local: user_file_id, foreign: id, type: one, onDelete: CASCADE, foreignAlias: FileCharges }
+    ChargeType: { onDelete: SET NULL, local: type_id, foreign: id }
+  indexes:
+    charge_idx: { fields: charge }
+
+ChargeType:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(60), notnull: true }
+    is_active: { type: boolean, default: 1 } 
+
+CommittalStream:
+  actAs: { Timestampable: ~ }
+  columns:
+    form_25_sent_date: { type: date }
+    hub_due_date: { type: date }
+    received_date: { type: date }
+    form_32_required: { type: string(20) }
+    form_32_due_date: { type: date }
+    form_32_filled_date: { type: date }
+    user_file_id: { type: integer, notnull: true }
+    court_date_id: { type: integer, notnull: false }
+    brief_status_id: { type: integer, notnull: false }
+  relations:
+    UserFile: { onDelete: CASCADE, local: user_file_id, foreign: id }
+    CourtDate: { onDelete: SET NULL, local: court_date_id, foreign: id }
+    BriefStatus: { class: Status, onDelete: SET NULL, local: brief_status_id, foreign: id, foreignAlias: BriefStatusCommittalStreams }
+
+Compliance:
+  actAs: { Timestampable: ~ }
+  columns:
+    original_grant_date: { type: date }
+    specific_category_applied_in: { type: string(120) }
+    12months_proof_of_means: { type: string(20) }
+    12months_proof_of_means_date: { type: date }
+    2years_proof_of_means: { type: string(20) }
+    2years_proof_of_means_date: { type: date }
+    release_custody_proof_of_means: { type: string(20) }
+    docs_for_self_employment: { type: string(20) }
+    bank_statements_for_3months: { type: string(20) }
+    recent_payslip_employeer_letter: { type: string(20) }
+    separation_certificate: { type: string(20) }
+    letter_for_new_address: { type: string(20) }
+    deteals_for_caveat_provided: { type: string(20) }
+    client_instructions_on_file: { type: string(20) }
+    charges: { type: string(20) }
+    priors: { type: string(20) }
+    centrelink_crn: { type: string(120) }
+    expiry_date_on_hcc: { type: date }
+    pay_board_amount: { type: string(120) }
+    name_of_fap: { type: string(120) }
+    expiry_date_of_fap_hcc: { type: date }
+    fap_bank_statements_for_3months: { type: string(20) }
+    negotiation_informant_prosecutor: { type: string(20) }
+    final_result_letter_sent: { type: string(20) }
+    worksheet_on_file: { type: string(20) }
+    issues_with_this_grant_of_aid: { type: string(255) }
+    legal_aid_id: { type: integer, notnull: true }
+    who_live_with_id: { type: integer, notnull: false }
+  relations:
+    LegalAid: { onDelete: CASCADE, local: legal_aid_id, foreign: id }
+    WhoLiveWith: { onDelete: SET NULL, local: who_live_with_id, foreign: id }
+
+Correspondence:
+  actAs: { Timestampable: ~ }
+  columns:
+    subject: { type: string(255) }
+    receiver_id: { type: integer, notnull: false }
+    receiver_name: { type: string(120) }
+    receiver_address: { type: string(255) }
+    cc_addresses_list: { type: string(1000) }
+    notes: { type: string(4000) }
+    sender_id: { type: integer, notnull: true }
+    backsheet_printed_date: { type: timestamp }
+    delivered_date: { type: date }
+    returned_date: { type: date }
+    ctype: { type: string(20) }
+    user_file_id: { type: integer, notnull: false }
+    court_date_id: { type: integer, notnull: false }
+    receiver_group_id: { type: integer, notnull: false }
+    sent_by_id: { type: integer, notnull: false }
+    document_id: { type: integer, notnull: false }
+  relations:
+    Receiver: { class: sfGuardUser, onDelete: SET NULL, local: receiver_id, foreign: id, foreignAlias: ReceiverCorrespondences }
+    Sender: { class: sfGuardUser, onDelete: SET NULL, local: sender_id, foreign: id, foreignAlias: SenderCorrespondences }
+    UserFile: { onDelete: CASCADE, local: user_file_id, foreign: id }
+    CourtDate: { onDelete: CASCADE, local: court_date_id, foreign: id }
+    sfGuardGroup: { onDelete: SET NULL, local: receiver_group_id, foreign: id }
+    SentBy: { onDelete: SET NULL, local: sent_by_id, foreign: id }
+    Document: { onDelete: SET NULL, local: document_id, foreign: id }
+
+CourtDate:
+  actAs: { Timestampable: ~ }
+  columns:
+    date: { type: date, notnull: true }
+    time: { type: timestamp }
+    result: { type: string(4000) }
+    instruction: { type: string(255) }
+    user_file_id: { type: integer, notnull: true }
+    court_id: { type: integer, notnull: false }
+    listing_id: { type: integer, notnull: false }
+    court_note_id: { type: integer, notnull: false }
+    appearing_type_id: { type: integer, notnull: false }
+    judge_id: { type: integer, notnull: true }
+    appearing_id: { type: integer, notnull: false }
+    coordinator_id: { type: integer, notnull: false }
+    barrister_id: { type: integer, notnull: false }
+  relations:
+    UserFile: { local: user_file_id, foreign: id, type: one, onDelete: CASCADE, foreignAlias: FileCourtDates }
+    Court: { class: Agency, onDelete: SET NULL, local: court_id, foreign: id }
+    Listing: { onDelete: SET NULL, local: listing_id, foreign: id }
+    CourtNote: { onDelete: SET NULL, local: court_note_id, foreign: id }
+    AppearingType: { onDelete: SET NULL, local: appearing_type_id, foreign: id }
+    Judge: { class: sfGuardUser, onDelete: SET NULL, local: judge_id, foreign: id, foreignAlias: JudgeCourtDates }
+    Appearing: { class: sfGuardUser, onDelete: SET NULL, local: appearing_id, foreign: id, foreignAlias: AppearingCourtDates }
+    Coordinator: { class: sfGuardUser, onDelete: SET NULL, local: coordinator_id, foreign: id, foreignAlias: CoordinatorCourtDates }
+    Barrister: { class: sfGuardUser, onDelete: SET NULL, local: barrister_id, foreign: id, foreignAlias: BarristerCourtDates }
+  indexes:
+    date_idx: { fields: date }
+
+CourtNote:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 }
+
+CustodyVisit:
+  actAs: { Timestampable: ~ }
+  columns:
+    date: { type: timestamp, notnull: true }
+    by_who: { type: string(120) }
+    is_by_phone: { type: boolean, default: false }
+    visit_place: { type: string(255) }
+    what_discussed: { type: string(255) }
+    user_file_id: { type: integer, notnull: true }
+  relations:
+    UserFile: { onDelete: CASCADE, local: user_file_id, foreign: id }
+
+Disbursement:
+  actAs: { Timestampable: ~ }
+  columns:
+    provider: { type: string(120) }
+    amount: { type: decimal, length: 10, scale: 2, notnull: true }
+    invoice_number: { type: string(60) }
+    date: { type: date }
+    paid: { type: string(20) }
+    disbursement_type_id: { type: integer, notnull: false }
+    court_date_id: { type: integer, notnull: false }
+  relations:
+    DisbursementType: { onDelete: SET NULL, local: disbursement_type_id, foreign: id }
+    CourtDate: { onDelete: SET NULL, local: court_date_id, foreign: id }
+
+DisbursementType:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    
+
+Document:
+  actAs: { Timestampable: ~ }
+  columns:
+    code: { type: string(60), notnull: true }
+    name: { type: string(120) }
+    description: { type: string(255) }
+    field1: { type: string(255) }
+    field2: { type: string(255) }
+    field3: { type: string(255) }
+    field4: { type: string(255) }
+    field5: { type: string(255) }
+    field6: { type: string(255) }
+    field7: { type: string(255) }
+    field8: { type: string(255) }
+    field9: { type: string(255) }
+    field10: { type: string(255) }
+    field11: { type: string(255) }
+    field12: { type: string(255) }
+    field13: { type: string(255) }
+    field14: { type: string(255) }
+    field15: { type: string(255) }
+    field16: { type: string(255) }
+    field17: { type: string(6000) }
+    field18: { type: string(6000) }
+    field19: { type: string(6000) }
+    field20: { type: blob }
+    doc_date: { type: timestamp }
+    court_date_id: { type: integer, notnull: false }
+    user_file_id: { type: integer, notnull: true }
+    document_type_id: { type: integer, notnull: false }
+    document_template_id: { type: integer, notnull: false }
+    updated_by_id: { type: integer, notnull: false }
+  relations:
+    CourtDate: { onDelete: SET NULL, local: court_date_id, foreign: id }
+    UserFile: { onDelete: CASCADE, local: user_file_id, foreign: id }
+    DocumentType: { onDelete: SET NULL, local: document_type_id, foreign: id } 
+    DocumentTemplate: { onDelete: SET NULL, local: document_template_id, foreign: id }
+    User: { class: sfGuardUser, onDelete: SET NULL, local: updated_by_id, foreign: id }
+
+DocumentDetail:
+  actAs: { Timestampable: ~ }
+  columns:
+    field1: { type: string(255) }
+    field2: { type: string(255) }
+    field3: { type: string(255) }
+    field4: { type: string(255) }
+    field5: { type: string(255) }
+    field6: { type: string(255) }
+    field7: { type: string(255) }
+    field8: { type: string(255) }
+    field9: { type: string(255) }
+    field10: { type: string(255) }
+    document_id: { type: integer, notnull: true }
+    document_template_id: { type: integer, notnull: false }
+  relations:
+    Document: { onDelete: CASCADE, local: document_id, foreign: id }
+    DocumentTemplate: { onDelete: SET NULL, local: document_template_id, foreign: id }
+
+DocumentTemplate:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 }
+    template_file: { type: string(120) }
+    template_word_file: { type: string(120) }
+    field1_params: { type: string(255) }
+    field2_params: { type: string(255) }
+    field3_params: { type: string(255) }
+    field4_params: { type: string(255) }
+    field5_params: { type: string(255) }
+    field6_params: { type: string(255) }
+    field7_params: { type: string(255) }
+    field8_params: { type: string(255) }
+    field9_params: { type: string(255) }
+    field10_params: { type: string(255) }
+    field11_params: { type: string(255) }
+    field12_params: { type: string(255) }
+    field13_params: { type: string(255) }
+    field14_params: { type: string(255) }
+    field15_params: { type: string(255) }
+    field16_params: { type: string(255) }
+    field17_params: { type: string(255) }
+    field18_params: { type: string(255) }
+    field19_params: { type: string(255) }
+    field20_params: { type: string(255) }
+    document_type_id: { type: integer, notnull: false }
+    admin_section_id: { type: integer, notnull: false }
+  relations:
+    DocumentType: { onDelete: SET NULL, local: document_type_id, foreign: id }
+    AdminSection: { onDelete: SET NULL, local: admin_section_id, foreign: id }
+
+DocumentType:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    short_name: { type: string(30), notnull: true }
+    description: { type: string(255) }
+    is_active: { type: boolean, default: 1 }
+    admin_section_id: { type: integer, notnull: false }
+  relations:
+    AdminSection: { onDelete: SET NULL, local: admin_section_id, foreign: id } 
+
+Fee:
+  actAs: { Timestampable: ~ }
+  columns:
+    amount: { type: decimal, length: 10, scale: 2, notnull: true }
+    vla: { type: string(20) }
+    paid: { type: string(20) }
+    need_invoicing: { type: string(20) }
+    filled_out_date: { type: timestamp }
+    funding_status_comment: { type: string(255) }
+    invoice_number: { type: string(60) }
+    court_date_id: { type: integer, notnull: false }
+    appear_by_whom_id: { type: integer, notnull: false }
+    status_id: { type: integer, notnull: false }
+  relations:    
+    CourtDate: { onDelete: SET NULL, local: court_date_id, foreign: id }
+    AppearByWhom: { class: sfGuardUser, onDelete: SET NULL, local: appear_by_whom_id, foreign: id }
+    Status: { onDelete: SET NULL, local: status_id, foreign: id }
+
+FeeAgreement:
+  actAs: { Timestampable: ~ }
+  columns:
+    lump_sum: { type: decimal, length: 10, scale: 2 }
+    gst: { type: decimal, length: 10, scale: 2 }
+    total: { type: decimal, length: 10, scale: 2 }
+    hourly_fee: { type: decimal, length: 6, scale: 2 }
+    estimate_total: { type: decimal, length: 10, scale: 2 }
+    counsel_daily_fee: { type: decimal, length: 8, scale: 2 }
+    instructor_daily_fee: { type: decimal, length: 8, scale: 2 }
+    by_what_date: { type: date }
+    sent_date: { type: timestamp }
+    account_type_id: { type: integer, notnull: false }
+    sent_by_id: { type: integer, notnull: false }
+    fee_agreement_type_id: { type: integer, notnull: false }
+    court_date_id: { type: integer, notnull: false }
+    user_file_id: { type: integer, notnull: true }
+  relations:
+    AccountType: { onDelete: SET NULL, local: account_type_id, foreign: id }
+    SentBy: { onDelete: SET NULL, local: sent_by_id, foreign: id }
+    FeeAgreementType: { onDelete: SET NULL, local: fee_agreement_type_id, foreign: id }    
+    CourtDate: { onDelete: SET NULL, local: court_date_id, foreign: id }
+    UserFile: { onDelete: SET NULL, local: user_file_id, foreign: id, foreignAlias: FileFeeAgreements }
+    
+FeeAgreementType:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 }
+
+FeeDetail:
+  actAs: { Timestampable: ~ }
+  columns:
+    amount: { type: decimal, length: 10, scale: 2, notnull: true }
+    barrister_fee: { type: decimal, length: 10, scale: 2 }
+    disbursement: { type: decimal, length: 10, scale: 2 }
+    preparation_fee: { type: decimal, length: 10, scale: 2 }
+    appearance_fee: { type: decimal, length: 10, scale: 2 }
+    date: { type: timestamp, notnull: true }
+    comment: { type: string(255) }
+    fee_id: { type: integer, notnull: true }
+    type_id: { type: integer, notnull: false }
+    by_who_id: { type: integer, notnull: false }
+  relations:
+    Fee: { class: Fee, onDelete: CASCADE, local: fee_id, foreign: id, foreignAlias: FeeDetails }
+    FeeDetailType: { onDelete: SET NULL, local: type_id, foreign: id }
+    ByWho: { class: sfGuardUser, onDelete: SET NULL, local: by_who_id, foreign: id }
+
+FeeDetailType:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 }
+
+FileAttachement:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    description: { type: string(255) }
+    document_file: { type: string(120) }
+    user_file_id: { type: integer, notnull: true }
+    document_id: { type: integer, notnull: false }
+    document_type_id: { type: integer, notnull: false }
+    correspondence_id: { type: integer, notnull: false }
+    updated_by_id: { type: integer, notnull: true }
+  relations:
+    UserFile: { onDelete: SET NULL, local: user_file_id, foreign: id }
+    Document: { onDelete: SET NULL, local: document_id, foreign: id }
+    DocumentType: { onDelete: SET NULL, local: document_type_id, foreign: id }
+    Correspondence: { onDelete: SET NULL, local: correspondence_id, foreign: id }
+    User: { class: sfGuardUser, onDelete: SET NULL, local: updated_by_id, foreign: id }
+
+FileNote:
+  actAs: { Timestampable: ~ }
+  columns:
+    date: { type: timestamp }
+    note_by: { type: string(120) }
+    note_to: { type: string(120) }
+    note: { type: string(4000) }
+    is_by_phone: { type: boolean, default: false }
+    user_file_id: { type: integer, notnull: false }
+  relations:
+    UserFile: { onDelete: SET NULL, local: user_file_id, foreign: id }
+
+Honorific:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    abbreviation: { type: string(20) } 
+    type:  { type: string(20),  default: CIVIL }
+    is_active: { type: boolean, default: 1 }
+
+Invoice:
+  actAs: { Timestampable: ~ }
+  columns:
+    number: { type: string(60), notnull: true, unique: true }
+    date: { type: date }
+    amount: { type: decimal, length: 10, scale: 2, notnull: true }
+    amount_paid: { type: decimal, length: 10, scale: 2 }
+    amount_due: { type: decimal, length: 10, scale: 2 }
+    fee_id: { type: integer, notnull: false }
+    type_id: { type: integer, notnull: false }
+    status_id: { type: integer, notnull: false }
+    court_date_id: { type: integer, notnull: false }
+    document_id: { type: integer, notnull: false }
+  relations:  
+    Fee: { onDelete: SET NULL, local: fee_id, foreign: id }
+    InvoiceType: { onDelete: SET NULL, local: type_id, foreign: id }
+    Status: { onDelete: SET NULL, local: status_id, foreign: id }
+    CourtDate: { onDelete: SET NULL, local: court_date_id, foreign: id }
+    Document: { onDelete: SET NULL, local: document_id, foreign: id }
+
+InvoiceType:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 }
+
+LegalAid:
+  actAs: { Timestampable: ~ }
+  columns:
+    reference_number: { type: string(120), notnull: true}
+    date_sent_given: { type: date }
+    date_aided_for: { type: date }
+    last_date_invoiced: { type: date }
+    user_file_id: { type: integer, notnull: true }
+    office_id: { type: integer, notnull: false }
+    assigment_officer_id: { type: integer, notnull: false }
+    vla_app_status_id: { type: integer, notnull: false }
+    aid_status_id: { type: integer, notnull: false }
+  relations:
+    UserFile: { onDelete: CASCADE, local: user_file_id, foreign: id }
+    Office: { class: Agency, onDelete: SET NULL, local: office_id, foreign: id, foreignAlias: OfficeLegalAids }
+    AssignmentOfficer: { class: sfGuardUser, onDelete: SET NULL, local: assigment_officer_id, foreign: id }
+    VlaStatus: { class: Status, onDelete: SET NULL, local: vla_app_status_id, foreign: id, foreignAlias: VlaLegalAids }
+    AidStatus: { class: Status, onDelete: SET NULL, local: aid_status_id, foreign: id, foreignAlias: AidLegalAids }
+
+Listing:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    description: { type: string(255) }
+    is_active: { type: boolean, default: 1 }
+  indexes:
+    name_idx: { fields: name }
+
+Location:
+  actAs: { Timestampable: ~ }
+  columns: 
+    suburb: { type: string(120), notnull: true }
+    postcode: { type: string(20), notnull: true }
+
+PreferredContact:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 }
+
+Receipt:
+  actAs: { Timestampable: ~ }
+  columns:
+    number: { type: string(60), notnull: true, unique: true }
+    amount_paid: { type: decimal, length: 10, scale: 2, notnull: true }
+    full_part: { type: string(20) }
+    date: { type: date, notnull: true }
+    for_what_date: { type: date }
+    status_id: { type: integer, notnull: false }
+    fee_id: { type: integer, notnull: false }
+    court_date_id: { type: integer, notnull: false }
+    received_by_id: { type: integer, notnull: false }
+    document_id: { type: integer, notnull: false }
+  relations:
+    Status: { onDelete: SET NULL, local: status_id, foreign: id }
+    Fee: { onDelete: SET NULL, local: fee_id, foreign: id }
+    CourtDate: { onDelete: SET NULL, local: court_date_id, foreign: id }
+    ReceivedBy: { class: sfGuardUser, onDelete: SET NULL, local: received_by_id, foreign: id }  
+    Document: { onDelete: SET NULL, local: document_id, foreign: id }
+
+Referral:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    first_thanked_date: { type: date }
+    current_thanked_date: { type: date }
+    thanked_times: { type: integer, default: 0 }
+
+SentBy:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+
+SettingParam:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    value: { type: string(255), notnull: true }
+    updated_by_id: { type: integer, notnull: false }
+  relations:
+    User: { class: sfGuardUser, onDelete: SET NULL, local: updated_by_id, foreign: id }
+
+sfGuardUserProfile:
+  actAs: { Timestampable: ~ }
+  columns:
+    street: { type: string(120), notnull: true }
+    suburb: { type: string(60), notnull: true }
+    postcode: { type: string(30), notnull: true }
+    city: { type: string(60) }
+    state: { type: string(30), default: 'VIC' }
+    home_phone: { type: string(255) }
+    work_phone: { type: string(255) }
+    mobile: { type: string(255) }
+    other_phone: { type: string(255) }
+    fax: { type: string(255) }
+    dob: { type: date }
+    picture_file: { type: string(120) }
+    badge_number: { type: string(60) }
+    signature_file: { type: string(120) }
+    criminal_crn: { type: string(60) }
+    centrelink_crn: { type: string(60) }
+    hcc_expiration_date: { type: date }
+    referral_id: { type: integer, notnull: false }
+    user_id: { type: integer, notnull: true }
+    related_user_id: { type: integer, notnull: false }
+    preferred_contact_id: { type: integer, notnull: false }
+    honorific_id: { type: integer, notnull: false }
+    #agency_id: { type: integer, notnull: false }
+  relations:
+    Referral: { onDelete: SET NULL, local: referral_id, foreign: id }
+    User: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreign: id, foreignType: one, foreignAlias: UserProfiles }      
+    RelatedUser: { class: sfGuardUser, onDelete: SET NULL, local: related_user_id, foreign: id, foreignAlias: RelatedUserProfiles }
+    PreferredContact: { onDelete: SET NULL, local: preferred_contact_id, foreign: id }
+    Honorific: { onDelete: SET NULL, local: honorific_id, foreign: id }
+    #Agency: { onDelete: SET NULL, local: agency_id, foreign: id }
+  indexes:
+    criminal_crn_idx: { fields: criminal_crn }
+    centrelink_crn_idx: { fields: centrelink_crn }
+    badge_number_idx: { fields: badge_number }
+
+ShortMessage:
+  actAs: { Timestampable: ~ }
+  columns:
+    sms_from: { type: string(120), notnull: true }
+    sms_to: { type: string(120), notnull: true }
+    office: { type: string(120) }
+    message: { type: string(255), notnull: true }
+    user_id: { type: integer, notnull: true }
+    user_file_id: { type: integer, notnull: false }
+  relations:
+    User: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreign: id }
+    UserFile: { onDelete: SET NULL, local: user_file_id, foreign: id }
+
+ShortMessageTemplate:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    message: { type: string(255), notnull: true }
+    is_active: { type: boolean, default: 1 }
+
+Status:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(60), notnull: true }
+    description: { type: string(255) }
+    status_type_id: { type: integer, notnull: true }
+  relations:
+    StatusType: { onDelete: CASCADE, local: status_type_id, foreign: id }
+
+StatusType:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    short_name: { type: string(30) }
+    description: { type: string(255) }
+    is_active: { type: boolean, default: 1 }
+
+Subgroup:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(120), notnull: true }
+    short_name: { type: string(30), notnull: true }
+    is_active: { type: boolean, default: 1 }
+    group_id: { type: integer, notnull: true }
+  relations:
+    Group: { class: sfGuardGroup, onDelete: CASCADE, local: group_id, foreign: id }
+
+Task:
+  actAs: { Timestampable: ~ }
+  columns:
+    task_by_id: { type: integer, notnull: true }
+    task_by2_id: { type: integer, notnull: false }
+    task_for_id: { type: integer, notnull: false }
+    due_date: { type: date, notnull: true }
+    description: { type: string(3000) }
+    done: { type: boolean, default: false }
+    user_file_id: { type: integer, notnull: false }
+    user_id: { type: integer, notnull: true }
+  relations:
+    User: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreign: id }
+    UserFile: { onDelete: SET NULL, local: user_file_id, foreign: id }
+    TaskBy: { class: sfGuardUser, onDelete: CASCADE, local: task_by_id, foreign: id, foreignAlias: TaskByTasks }
+    TaskBy2: { class: sfGuardUser, onDelete: SET NULL, local: task_by2_id, foreign: id, foreignAlias: TaskBy2Tasks }
+    TaskFor: { class: sfGuardUser, onDelete: SET NULL, local: task_for_id, foreign: id, foreignAlias: TaskForTasks }
+
+UserFile:
+  actAs: { Timestampable: ~ }
+  columns:
+    number: { type: string(120), notnull: true, unique: true }
+    charge_first_name: { type: string(255), notnull: true }
+    charge_last_name: { type: string(255) }
+    first_name: { type: string(255) }
+    last_name: { type: string(255) }
+    honorific_id: { type: integer, notnull: false }
+    preferred_contact_id: { type: integer, notnull: false }
+    correspondence_title: { type: boolean, default: false }
+    correspondence_real_name: { type: boolean, default: false }
+    correspondence_sent_option: { type: integer(1) }
+    street: { type: string(120), notnull: true }
+    suburb: { type: string(60), notnull: true }
+    postcode: { type: string(30), notnull: true }
+    city: { type: string(60) }
+    state: { type: string(30), default: 'VIC' }
+    street2: { type: string(120) }
+    suburb2: { type: string(60) }
+    postcode2: { type: string(30) }
+    city2: { type: string(60) }
+    state2: { type: string(30), default: 'VIC' }
+    home_phone: { type: string(60) }
+    work_phone: { type: string(60) }
+    mobile: { type: string(60) }
+    other_phone: { type: string(60) }
+    fax: { type: string(60) }
+    email: { type: string(120) }
+    first_instructions_date: { type: date }
+    case_number: { type: string(60) }
+    instruction_on_file: { type: string(20) }
+    instruction: { type: string(4000) }
+    barrister_backsheet_options: { type: string(10) }
+    barrister_fee: { type: string(255) }
+    in_custody: { type: string(20) }
+    bail_on_this: { type: string(20) }
+    client_id: { type: integer, notnull: true }
+    solicitor_id: { type: integer, notnull: false }
+    informant_id: { type: integer, notnull: false }
+    prosecutor_id: { type: integer, notnull: false }
+    barrister_id: { type: integer, notnull: false }
+    prosecution_id: { type: integer, notnull: false }
+    prison_id: { type: integer, notnull: false }
+    status_id: { type: integer, notnull: false }
+  relations:
+    Honorific: { onDelete: SET NULL, local: honorific_id, foreign: id }
+    PreferredContact: { onDelete: SET NULL, local: preferred_contact_id, foreign: id }
+    Client: { class: sfGuardUser, onDelete: CASCADE, local: client_id, foreign: id, foreignAlias: ClientUserFiles }
+    Solicitor: { class: sfGuardUser, onDelete: SET NULL, local: solicitor_id, foreign: id, foreignAlias: SolicitorUserFiles }
+    Informant: { class: sfGuardUser, onDelete: SET NULL, local: informant_id, foreign: id, foreignAlias: InformantUserFiles }
+    Prosecutor: { class: sfGuardUser, onDelete: SET NULL, local: prosecutor_id, foreign: id, foreignAlias: ProsecutorUserFiles }
+    Barrister: { class: sfGuardUser, onDelete: SET NULL, local: barrister_id, foreign: id, foreignAlias: BarristerUserFiles }
+    Prosecution: { class: Agency, onDelete: SET NULL, local: prosecution_id, foreign: id, foreignAlias: ProsecutionUserFiles }
+    Prison: { class: Agency, onDelete: SET NULL, local: prison_id, foreign: id, foreignAlias: PrisonUserFiles }
+    Status: { onDelete: SET NULL, local: status_id, foreign: id }
+  indexes:
+    case_number_idx: { fields: case_number }
+    charge_first_name_idx: { fields: charge_first_name }
+    charge_last_name_idx: { fields: charge_last_name }
+
+WhoLiveWith:
+  actAs: { Timestampable: ~ }
+  columns:
+    value: { type: string(120), notnull: true }
+    is_active: { type: boolean, default: 1 }

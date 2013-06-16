@@ -1,0 +1,2 @@
+<?php $helper->title = "INTERIM RECEIPT" ?>
+<?php echo $helper->get_partial_subfolder('paircp', 'fee', array('document' => $document, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>

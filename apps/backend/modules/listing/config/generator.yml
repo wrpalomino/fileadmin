@@ -1,0 +1,42 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Listing
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          listing
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        fields:
+          is_active: { label: Active }
+          #updated_at: { label: Updated }
+        display: [name, is_active]
+        sort: [name, asc]
+        max_per_page: 40
+        object_actions:
+          _edit:    ~
+          _delete:  ~
+        batch_actions: {}
+      filter:  ~
+      form:    ~
+      edit:
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      ajaxedit: ~
+      new:  
+        actions: 
+          _save:
+          search_mode:
+        #return_to: edit
+      show:    ~
+      

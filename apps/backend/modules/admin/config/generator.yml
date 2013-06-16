@@ -1,0 +1,28 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    #model_class:           sfGuardUser
+    model_class:           UserFile
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          user_file
+    #route_prefix:          sf_guard_user_admin
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:    ~
+      edit:    
+        return_to: edit
+      ajaxedit: ~
+      new:     
+        return_to: edit
+      show:    ~
+      

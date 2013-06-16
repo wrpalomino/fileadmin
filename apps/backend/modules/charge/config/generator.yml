@@ -1,0 +1,35 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Charge
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          charge
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:   
+        display: [item, section, acts, =charge, comment, date, file_number, updated_at]
+        batch_actions: {}
+      filter:  ~
+      form:    
+        actions: {}
+      edit:    
+        actions: 
+          _save:
+          _list:
+        #return_to: edit
+      ajaxedit: ~
+      new:     
+        actions: 
+          _save:
+          _list:
+        #return_to: edit
+      show:    ~
+      

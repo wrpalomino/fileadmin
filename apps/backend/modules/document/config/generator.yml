@@ -1,0 +1,40 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Document
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          document_document
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        fields:
+          court_date_date: { label: Court Date }
+          description: { label: Modes }
+        display: [id, code, user_file, court_date_date, document_type, user, doc_date, description, updated_at]
+        max_per_page: 20
+        table_method: retrieveValidDocumentList
+        batch_actions: {}
+        actions: {}
+        object_actions:
+          _edit:
+          _delete:
+      filter:
+        display: [id, code, user_file_id, document_type_id]
+      form:    
+        actions:
+          _save: { label: .Save Doc.. }
+      edit:    
+        return_to: edit
+      ajaxedit: ~
+      new:     
+        return_to: edit
+      show:    ~
+      

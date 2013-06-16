@@ -1,0 +1,44 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           FileAttachement
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          file_attachement
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: Scanned Document File List
+        display: [description, name, _document_file, user_file, updated_by, updated_at]
+        max_per_page: 10
+        object_actions:
+          _edit:
+          _delete:  
+          _show:
+          _email:
+        batch_actions: {}
+      filter:  
+        display: [description, name, user_file_id, updated_by_id, updated_at]
+      form:    ~
+      edit:    
+        title: Edit Scanned Document File
+        actions: 
+          _save:
+          _list:
+        #return_to: edit
+      ajaxedit: ~
+      new:     
+        title: New Scanned Document File
+        actions: 
+          _save:
+          _list:
+        #return_to: edit
+      show:    ~
+      

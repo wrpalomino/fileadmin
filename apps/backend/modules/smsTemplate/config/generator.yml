@@ -1,0 +1,36 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           ShortMessageTemplate
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          short_message_template
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: SMS Templates List
+        display: [name, message, is_active, updated_at]
+        max_per_page: 10
+        batch_actions: {}
+      filter:  
+        display: [name, message, is_active, updated_at]
+      form:    ~
+      edit:    
+        title: Edit SMS Template
+        #return_to: edit
+      ajaxedit: ~
+      new:     
+        title: New SMS Template
+        actions:
+          _list:
+          _save:
+        #return_to: edit
+      show:    ~
+      

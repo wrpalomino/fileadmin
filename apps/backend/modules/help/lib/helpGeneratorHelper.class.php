@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * help module helper.
+ *
+ * @package    PhpProject1
+ * @subpackage help
+ * @author     Your name here
+ * @version    SVN: $Id: helper.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class helpGeneratorHelper extends BaseHelpGeneratorHelper
+{
+  function getPageLinks()
+  { 
+    return (isset(Link::$help_page_links)) ? Link::$help_page_links : array();
+  }
+  
+  function getSectionLinks($section)
+  {
+    return (isset(Link::${'help_'.$section.'_links'})) ? Link::${'help_'.$section.'_links'} : array();
+  }
+  
+}

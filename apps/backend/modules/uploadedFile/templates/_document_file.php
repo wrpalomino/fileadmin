@@ -1,0 +1,1 @@
+<a href="<?php echo url_for('downloadPDF/download?directory='.$file_attachement->getUserFile()->getNumber().'&filename='.$file_attachement->getDocumentFile()) ?>"><?php echo $file_attachement->getDocumentFile() ?>

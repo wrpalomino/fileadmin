@@ -1,0 +1,2 @@
+<?php $helper->sign_text = "<tr><td></td><td>".$form['field9']->renderRow().$helper->sign_text."</td></tr>"; ?>
+<?php echo $helper->get_partial_subfolder('stdemi', 'client', array('document' => $document, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>

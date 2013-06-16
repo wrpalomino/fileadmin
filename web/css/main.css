@@ -1,0 +1,474 @@
+body {
+  margin: 2px;
+  padding: 2px;
+}
+
+#layout, #layout2 {
+  width: 100%;
+}
+
+#layout td, th {
+  border-collapse: collapse;
+  border-style: none;
+  text-align: left;
+  width: 33% !important;
+}
+
+#layout2 td, th {
+  border-collapse: collapse;
+  border-style: none;
+  text-align: left;
+}
+
+#top_filter {
+  width: 100%;
+}
+
+#top_filter td, th {
+  border-collapse: collapse;
+  border-style: none;
+  text-align: left;
+  padding-left: 20px;
+}
+
+#edit_pager {
+  width: 200px !important;
+}
+
+#edit_pager td, th {
+  border-collapse: collapse;
+  border-style: none;
+}
+
+A:link      
+{
+  color: black;
+}
+
+A:visited   
+{
+  color: black;
+}
+
+A:active 
+{
+  color: black;
+}
+
+A:hover 
+{
+  color: blue;
+  text-decoration: none;
+}
+
+#leftnavigation 
+{
+  position : absolute;
+  left : 0;
+  width : 10%;
+  margin-left : 10px;
+  margin-top : 20px;
+  color : #000000;
+  padding : 3px;
+}
+
+#rightnavigation 
+{
+  position : absolute;
+  left : 80%;
+  top : 20px;
+  width : 10%;
+  padding-left : 10px;
+  z-index : 3;
+  color : #000000;
+  padding : 3px;
+}
+
+ /* Then for the content row, I set the margins to be somewhat relative to the outer columns. */
+
+#content, #sideBar, #clientFilter
+{
+  top : 0px;
+  margin : 0px;
+  padding : 0px;
+  color : #000000;
+  width: 100%;
+}
+
+div.title 
+{
+  padding-top : 20px;
+  font-weight : bolder;
+}
+
+div.title_blue
+{
+  font-weight : bolder;
+  color: blue;
+}
+
+table.sf_admin_filter_table td th
+{
+  padding: 0px;
+}
+
+/*#sf_admin_container .sf_admin_filter
+{
+}*/
+
+/*#sf_admin_container .sf_admin_form
+{
+}*/
+
+#sf_admin_container .info
+{
+  margin: 4px 0;
+  padding: 4px 4px 4px 30px;
+  background: url(../images/info.png) no-repeat 10px 4px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #F8E1D1;
+}
+
+/* to fix a problem: show inline lable and input element in the forms */
+#sf_admin_container .sf_admin_form_row label
+{
+  float: left !important;
+}
+
+#sf_admin_content li.sf_admin_action_new a
+{
+  background: url(../images/new.png) no-repeat 0 0;
+  padding-left: 20px;
+}
+
+/*************************************** menu *******************************************************/
+
+div.bottombar{ /* bar that runs across the bottom of the menu */
+  height: 10px;
+  background: #99aaff;
+}
+
+ul.semiopaquemenu{ /* main menu UL */
+  font: bold 14px Verdana;
+  width: 100%;
+  background: #99aaff;
+  padding: 11px 0 8px 0; /* padding of the 4 sides of the menu */
+  margin: 0;
+  text-align: left; /* set value to "left", "center", or "right" to align menu accordingly */
+}
+
+ul.semiopaquemenu li{
+  display: inline;
+}
+
+ul.semiopaquemenu li a{
+  color:black;
+  padding: 6px 8px 6px 8px; /* padding of the 4 sides of each menu link */
+  margin-right: 15px; /* spacing between each menu link */
+  text-decoration: none;
+}
+
+ul.semiopaquemenu li a:hover, ul.semiopaquemenu li a.selected{
+  color: black;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjgyIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4xNiIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); /* IE9+ SVG equivalent  of linear gradients */
+  background: -moz-linear-gradient(top,  rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.16) 100%); /* fade from white (0.82 opacty) to 0.16 opacity */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.82)), color-stop(100%,rgba(255,255,255,0.16)));
+  background: -webkit-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+  background: -o-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+  background: -ms-linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+  background: linear-gradient(top,  rgba(255,255,255,0.82) 0%,rgba(255,255,255,0.16) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ffffff', endColorstr='#29ffffff',GradientType=0 );
+  -moz-box-shadow: 0 0 5px #595959; /* CSS3 box shadows */
+  -webkit-box-shadow: 0 0 5px #595959;
+  box-shadow: 0 0 5px #595959;
+  padding-top: 12px; /* large padding to get menu item to protrude upwards */
+  padding-bottom: 20px; /* large padding to get menu item to protrude downwards */
+}
+
+/* vertical menu */
+
+#menu8 {
+  width: 200px;
+  margin-top: 20px;
+  float: right;
+}
+	
+#menu8 ul {
+  list-style: none !important;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none !important;
+}
+
+#menu8 ul li {
+  list-style-type: none !important;
+  margin: 0px;
+  padding: 0px;
+}
+
+#menu8 li a {
+  text-decoration: none !important;
+  voice-family: inherit;
+  height: 24px;
+}
+
+#menu8 li a.selected:visited, #menu8 li a.selected:link, #menu8 li a.selected:active {
+  color: #fff;
+  background: url(../images/menu8.gif) 0 -64px;
+  padding: 8px 0 0 25px; 
+}
+
+#menu8 li a:link, #menu8 li a:visited {
+  color: #777;
+  display: block;
+  background: url(../images/menu8.gif);
+  padding: 8px 0 0 20px;
+}
+	
+#menu8 li a:hover {
+  color: #257EB7;
+  background: url(../images/menu8.gif) 0 -32px;
+  padding: 8px 0 0 25px;
+}
+	
+#menu8 li a:active {
+  color: #fff;
+  background: url(../images/menu8.gif) 0 -64px;
+  padding: 8px 0 0 25px; 
+}
+
+
+/* more menu styles */
+#section_links li
+{
+  line-height: 2em;
+}
+
+#section_links2 li
+{
+  width: 50% !important;
+  float: left !important;
+  line-height: 2em;
+}
+
+#section_links2 ul
+{
+  width: 100% !important;
+}
+
+#sf_admin_container #sf_admin_extra_content
+{
+  width: 250px;
+  float: right;
+  padding: 8px;
+  margin: 30px 0 0 0;
+  border: 1px solid;
+  clear: both;
+  white-space: nowrap;
+}
+
+#sf_admin_extra_content .sf_admin_radio
+{
+  height: 20px !important;
+}
+
+/* external links */
+#section_links li a.external_lnk:link, #section_links2 li a.external_lnk:link, 
+#section_links li a.external_lnk:visited, #section_links2 li a.external_lnk:visited, 
+#section_links li a.external_lnk:active, #section_links2 li a.external_lnk:active
+{
+  color: darkblue !important;
+}
+
+
+/************************* for tabs in form's fieldsets ***************************/
+#parent {
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
+#parent div.tab_1 {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  display: block;
+}
+
+#parent div.tab_more {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  display: none;
+}
+
+ul.tabsje {
+  margin: 0;
+  padding: 0px 0px 0px 23px;
+  /*float: left;*/
+  list-style: none;
+  height: 29px;
+  width: 100%;
+}
+
+ul.tabsje li {
+  float: left;
+  width: 125px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 29px;
+  line-height: 29px;
+  margin: 0px 5px 0px 0px;
+  background: none;
+  overflow: hidden;
+  position: relative;
+  border-bottom:none;
+  -moz-border-radius-topright: 13px;
+  -khtml-border-radius-topright: 13px;
+  -webkit-border-top-right-radius: 13px;
+  -moz-border-radius-topleft: 13px;
+  -khtml-border-radius-topleft: 13px;
+  -webkit-border-top-left-radius: 13px;
+  background: #99AAFF;
+}
+
+ul.tabsje li a {
+  font:bold 12px/29px Arial, Helvetica, sans-serif;
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 0 12px;
+  outline: none;
+  font-size:14px;
+  color:#FFFFFF;
+  font-weight:bold;
+}
+ul.tabsje li a:hover {
+	
+}	
+html ul.tabsje li.activeje, html ul.tabsje li.activeje a:hover  {
+  background: #CCCCFF;
+  -moz-border-radius-topright: 13px;
+  -khtml-border-radius-topright: 13px;
+  -webkit-border-top-right-radius: 13px;
+  -moz-border-radius-topleft: 13px;
+  -khtml-border-radius-topleft: 13px;
+  -webkit-border-top-left-radius: 13px;	
+}
+
+div.hr { 
+  width: 100%; 
+  height: 10px; 
+  border: 0px; 
+  background-color: #CCCCFF;
+  margin: 0px; 
+}
+
+
+#sf_admin_container .info
+{
+  margin: 4px 0;
+  padding: 4px 4px 4px 30px;
+  background: url(../images/info.png) no-repeat 10px 4px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #F8E1D1;
+}
+
+#sf_search_container
+{
+  float: left;
+}
+
+.help {
+  background-color: #ffff99;
+  margin-top: -10px;
+  color: #000066 !important;
+  padding-left: 4px !important;
+  font-size: 11px;
+}
+
+.help font {
+  font-weight: bold;
+  color: red;
+}
+
+a.tabHref {
+  cursor:default;
+}
+
+/* style for main filter */
+#clientFilter {
+  margin-bottom: 2px;
+}
+#clientFilter .clientFilterForm {
+  float:left;
+  width:80%;
+  white-space:nowrap;
+  margin-bottom: -12px;
+}
+#top_filter th  {
+  width: 40px !important;
+}
+
+#clientFilter .clientFilterButtons {
+  float:left;
+}
+
+#mainFilterPagination {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+#mainFilterPagination td { 
+  margin: 0px;
+  padding: 6px 62% 4px 2%;
+  border: 0px;
+  text-align: left;
+  font-weight: bold;
+}
+#mainFilterPagination td.fileStatus {
+  width: 140px;
+  font-weight: bold;  
+  margin: 0px;
+  padding: 4px 10px 4px 30px;
+  background: url(../images/info.png) no-repeat 10px 4px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #F8E1D1;
+}
+#mainFilterPagination td.notice { 
+  background-color: #ffc;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+#mainFilterPagination td.info { 
+  background-color: #F8E1D1;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+#mainFilterPagination td a { 
+  text-decoration: none !important;
+}
+#mainFilterPagination td a:hover { 
+  text-decoration: underline !important;
+}
+
+div.clear {
+  clear: both;
+}
+
+#mf_filter {
+  background-color: #257EB7;
+  color: #FFF;
+  width: 60px;
+}
+
+#mf_reset {
+  background-color: red;
+  color: #FFF;
+  width: 60px;
+}

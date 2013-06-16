@@ -1,0 +1,39 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           AidGrant
+    theme:                 zafire
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          aid_grant
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        fields: 
+          fee_granted: { label: Fee Granted ($)}
+        display: [ aid_in_place, date, fee_granted, is_indictable, updated_at]
+        max_per_page: 1
+        batch_actions: {}
+      filter:  ~
+      form:    ~
+      edit:
+        actions: 
+          _save:
+          _list:
+          #search_mode:
+        #return_to: edit
+      ajaxedit: ~
+      new:  
+        actions: 
+          _save:
+          _list:
+          #search_mode:
+        #return_to: edit
+      show:    ~
+      
