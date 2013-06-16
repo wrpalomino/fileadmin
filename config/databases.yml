@@ -5,8 +5,6 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:      mysql:host=localhost;dbname=webdevxt_fileadmin
-      username: webdevxt_fadmin
-      #dsn:      mysql:host=localhost;dbname=dbcrimla_fileadmin
-      #username: dbcrimla_admin
-      password: fileadmin1234
+      dsn:      .
+      username: .
+      password: .
