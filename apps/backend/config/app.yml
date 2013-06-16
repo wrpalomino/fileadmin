@@ -140,19 +140,19 @@ all:
   rate_per_hour: 330
   
   server:
-    emailfrom:       faxdbcrimlaw@gmail.com
+    emailfrom:       wr.palomino@gmail.com
     emailfromtitle:  Martinez & Morgan Lawyers
-    emailto:         faxdbcrimlaw@gmail.com
-    emailpassword:   snookums01
+    emailto:         wr.palomino@gmail.com
+    emailpassword:   .
     # ip of the production site
-    proip:           111.223.227.66
-    baseurl:         111.223.227.66
+    proip:           .
+    baseurl:         .
     owneremail:      wr.palomino@gmail.com
     notifyfaxpages:  3
     
-    loginpage:       https://secondary.geo-ha.micron21.com:10000
-    username:        root
-    password:        Q8J2c172Sj3x
+    loginpage:       .
+    username:        .
+    password:        .
   
   # html to pdf convertion service (.setting is added to allow get pdfservice data set as arr)
   .settings:
@@ -160,9 +160,9 @@ all:
       active:         0
       provider:       PDFCrowd
       loginpage:      https://pdfcrowd.com/user/sign_in
-      password:       williampalomino
-      user:           williampalomino
-      apikey:         031d623eba66686a45a50852ad4e3d84
+      password:       .
+      user:           .
+      apikey:         .
   
   # fax to email service
   .settings1:
@@ -170,20 +170,15 @@ all:
       active:         0
       provider:       Micron21 eFax
       loginpage:      https://voice.url.net.au/user
-      username:       mike@dbcrimlaw.com.au
-      password:       BNd!VGKl4%uh
-      customerid:     1987
-      PIN:            4763
-      domain:         fax.url.net.au
-      serviceid:      2866
-      faxnumber:      0391115645
-      faxfromemail:   faxdbcrimlaw@gmail.com
-      faxtoemail:     faxdbcrimlaw@gmail.com
-      # for testing only, expired (10/01/2013)
-      #serviceid:      2663
-      #faxnumber:      0391115627
-      #faxfromemail:   wr.palomino@gmail.com
-      #faxtoemail:     wr.palomino@gmail.com
+      username:       .
+      password:       .
+      customerid:     .
+      PIN:            .
+      domain:         .
+      serviceid:      .
+      faxnumber:      .
+      faxfromemail:   .
+      faxtoemail:     .
   
   .settings2:
     smsservice:
@@ -192,8 +187,8 @@ all:
       #url:            https://www.smsfun.com.au/api/login.php
       #type:           curl
       #params:
-        #mobile:       0423595306
-        #password:     virgoSMSFUN11
+        #mobile:       .
+        #password:     .
         #send_to:      .
         #message:      .
         #send:         .
@@ -202,10 +197,8 @@ all:
       url:            http://www.smsbroadcast.com.au/api.php
       type:           url
       params:
-        #username:     williampalomino
-        #password:     williampalomino
-        username:     mikeb33
-        password:     generic01
+        username:     .
+        password:     .
         # fields must have at least one character; otherwise, they are disregarded by isset()
         from:         .
         to:           .
@@ -219,11 +212,11 @@ all:
       url:            .
       type:           curl
       params:
-        username:     Michael.brown3@me.com
-        password:     snookums99
-        icloudid:     1060368088
-        appleid:      michael.brown3
-        server:       p01
+        username:     .
+        password:     .
+        icloudid:     .
+        appleid:      .
+        server:       .
         description:  .
         summary:      .
         eid:          .
