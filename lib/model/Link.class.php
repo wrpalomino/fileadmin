@@ -1,8 +1,12 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Link model.
+ *
+ * @package    fileadmin
+ * @subpackage model
+ * @author     William Palomino
+ * @version    3.0
  */
 class Link 
 {
